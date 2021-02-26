@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend\Sale;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
-use App\Models\Category;
 use App\Models\Backend\Sale\Sale_final;
 use App\Models\Backend\Sale\Sale_detail;
 use App\Models\Backend\Sale\Sale_warranty_guarantee;
@@ -169,8 +168,10 @@ class AddToCartController extends Controller
                 {
                     $newQty = $quantity;
                     if($sale_unit_id == $cartName[$productVari->id]['sale_unit_id']) $newQty = $cartName[$productVari->id]['quantity'] + $quantity;
-                    $newNetAmount = number_format($sale_price * $newQty ,2);
+                    $newNetAmount = number_format($sale_price * $newQty ,2,'.', '');
                     
+                    //number_format(1000.5, 0, ',', '');
+
                     if($discountType == 'percentage')
                     {
                         $disAmount =   ($newNetAmount * $discountValue) / 100;
@@ -178,11 +179,11 @@ class AddToCartController extends Controller
                         $disAmount  = $discountValue;
                     }
                     $newTotalNetAmount = $newNetAmount - $disAmount;
-                    $cartName[$productVari->id]['sale_price']           = number_format($sale_price,2);
+                    $cartName[$productVari->id]['sale_price']           = number_format($sale_price,2,'.', '');
                     $cartName[$productVari->id]['discountType']         = $discountType;
                     $cartName[$productVari->id]['discountValue']        = $discountValue;
                     $cartName[$productVari->id]['quantity']             = $newQty;
-                    $cartName[$productVari->id]['netTotalAmount']       = number_format($newTotalNetAmount ,2);
+                    $cartName[$productVari->id]['netTotalAmount']       = number_format($newTotalNetAmount ,2,'.', '');
                     $cartName[$productVari->id]['identityNumber']       = $identityNumber;
 
                     $cartName[$productVari->id]['sale_type_id']         = $sale_type_id;
@@ -194,11 +195,11 @@ class AddToCartController extends Controller
                 $cartName[$productVari->id] = [
                     'productVari_id' => $productVari->id,
                     'name' => $productName,
-                    'sale_price' => number_format($sale_price,2),
+                    'sale_price' => number_format($sale_price,2,'.', ''),
                     'discountType' => $discountType,
                     'quantity' => $quantity,
                     'discountValue' => $discountValue,
-                    'netTotalAmount' => number_format($netTotalAmount,2),
+                    'netTotalAmount' => number_format($netTotalAmount,2,'.', ''),
                     'identityNumber' => $identityNumber,
                     'sale_type_id'  => $sale_type_id,
                     'sale_from_stock_id' => $sale_from_stock_id,
@@ -252,8 +253,8 @@ class AddToCartController extends Controller
                     $stock_id = $cartName[$productVari->id]['sale_from_stock_id'];
                     $business_location_id = 1;
                     $avlQty = checkPrimaryStockQtyByPVIDWithoutProductId_HH($stock_id,$business_location_id,$product_variation_id);
-                    $availAbleQty = $avlQty?$avlQty->available_stock :0; 
-                  
+                    $availAbleQty = $avlQty?$avlQty->available_stock :0;
+
                     $availableStock = availableStock_HH($cartName[$productVari->id]['sale_unit_id'],$availAbleQty);
                     $available_status   = 'not_available';
                     if($availableStock > $cartName[$productVari->id]['quantity'])
@@ -281,7 +282,7 @@ class AddToCartController extends Controller
                 //$cartName[$product->id]['discountType']     =  $cartName[$product->id]['discountType'] ;
                 //$cartName[$product->id]['discountValue']    =  $cartName[$product->id]['discountValue'] ;
                 $cartName[$productVari->id]['quantity']         =  $quantity;
-                $cartName[$productVari->id]['netTotalAmount']   =  number_format(($quantity *  $cartName[$productVari->id]['sale_price']) - $totalDiscountAmount,2);
+                $cartName[$productVari->id]['netTotalAmount']   =  number_format(($quantity *  $cartName[$productVari->id]['sale_price']) - $totalDiscountAmount,2,'.', '');
                 //$cartName[$product->id]['identityNumber']   =  $cartName[$product->id]['identityNumber'] ;
             }
             session(['cartName' => $cartName]);
@@ -320,12 +321,12 @@ class AddToCartController extends Controller
         $data['customer_id'] = $request->customerId;
         $data['employee_Id'] = $request->employeeId;
         $data['fianl_total_item'] = $request->totalItem;
-        $data['final_sub_total_amount'] = number_format($request->subTotalAmount,2);
+        $data['final_sub_total_amount'] = number_format($request->subTotalAmount,2,'.', '');
         $data['final_discount_type'] = $request->discountType;
-        $data['final_discount_value'] = number_format($request->discountValue,2);
-        $data['final_discount_amount'] = $request->discountAmount?number_format($request->discountAmount,2):'';
-        $data['fianl_other_cost'] = number_format($request->otherCost,2);
-        $data['fianl_payable_amount'] = number_format($request->payableAmount,2);
+        $data['final_discount_value'] = number_format($request->discountValue,2,'.', '');
+        $data['final_discount_amount'] = $request->discountAmount?number_format($request->discountAmount,2,'.', ''):'';
+        $data['fianl_other_cost'] = number_format($request->otherCost,2,'.', '');
+        $data['fianl_payable_amount'] = number_format($request->payableAmount,2,'.', '');
         return view('backend.sale_pos.ajax.payment.payment_modal',$data);
     }
 

@@ -1284,6 +1284,7 @@
     ---}}
     <script src="{{ asset('public') }}/custom_js/backend/sale/create.js?v=1"></script>
     <script src="{{ asset('public') }}/custom_js/backend/sale/create_cart.js?v=1"></script>
+    <script src="{{ asset('public') }}/custom_js/backend/sale/create_payment.js?v=1"></script>
 
 </body>
 <!--  /Body -->

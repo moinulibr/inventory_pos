@@ -160,19 +160,19 @@ class AddToCartController extends Controller
                         'default_sale_unit_id' => $productVar->default_sale_unit_id,
                         'default_purchase_unit' => $productVar->defaultPurchaseUnits?$productVar->defaultPurchaseUnits->short_name:NULL,
                         'purchase_quantity' => 1,
-                        'purchase_unit_price_before_discount' => number_format($productVar->purchase_unit_price_before_discount,2),
-                        'purchase_unit_price_before_tax' => number_format($productVar->purchase_unit_price_before_tax,2),
-                        'sub_total_before_tax' => number_format(($productVar->purchase_unit_price_before_tax * 1),2),
+                        'purchase_unit_price_before_discount' => number_format($productVar->purchase_unit_price_before_discount,2,'.', ''),
+                        'purchase_unit_price_before_tax' => number_format($productVar->purchase_unit_price_before_tax,2,'.', ''),
+                        'sub_total_before_tax' => number_format(($productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
 
                         'applicable_tax_for_purchase' => $productVar->applicable_tax_for_purchase,
                         'product_tax' => $productVar->applicable_tax_for_purchase == 1 ? $productVar->purchase_tax_amount : 0,
 
                         'discount_value_in_parcent' => 0,
-                        'net_purchase_amount' => number_format($productVar->purchase_unit_price_before_tax,2),
-                        'line_total' => number_format(($productVar->purchase_unit_price_before_tax * 1),2),
+                        'net_purchase_amount' => number_format($productVar->purchase_unit_price_before_tax,2,'.', ''),
+                        'line_total' => number_format(($productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
 
                         'profit_margin_parcent' => defaultProfitMargin_HH(),
-                        'unit_selling_price_inc_tax' => number_format(  ( (($productVar->purchase_unit_price_before_tax * 1) * defaultProfitMargin_HH() /100) + $productVar->purchase_unit_price_before_tax * 1),2),
+                        'unit_selling_price_inc_tax' => number_format(  ( (($productVar->purchase_unit_price_before_tax * 1) * defaultProfitMargin_HH() /100) + $productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
                     ];
                 }
                 session(['productPurchaseCart' => $productPurchaseCart]);
@@ -260,19 +260,19 @@ class AddToCartController extends Controller
                         'default_sale_unit_id' => $productVar->default_sale_unit_id,
                         'default_purchase_unit' => $productVar->defaultPurchaseUnits?$productVar->defaultPurchaseUnits->short_name:NULL,
                         'purchase_quantity' => 1,
-                        'purchase_unit_price_before_discount' => number_format($productVar->purchase_unit_price_before_discount,2),
-                        'purchase_unit_price_before_tax' => number_format($productVar->purchase_unit_price_before_tax,2),
-                        'sub_total_before_tax' => number_format(($productVar->purchase_unit_price_before_tax * 1),2),
+                        'purchase_unit_price_before_discount' => number_format($productVar->purchase_unit_price_before_discount,2,'.', ''),
+                        'purchase_unit_price_before_tax' => number_format($productVar->purchase_unit_price_before_tax,2,'.', ''),
+                        'sub_total_before_tax' => number_format(($productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
 
                         'applicable_tax_for_purchase' => $productVar->applicable_tax_for_purchase,
                         'product_tax' => $productVar->applicable_tax_for_purchase == 1 ? $productVar->purchase_tax_amount : 0,
 
                         'discount_value_in_parcent' => 0,
-                        'net_purchase_amount' => number_format($productVar->purchase_unit_price_before_tax,2),
-                        'line_total' => number_format(($productVar->purchase_unit_price_before_tax * 1),2),
+                        'net_purchase_amount' => number_format($productVar->purchase_unit_price_before_tax,2,'.', ''),
+                        'line_total' => number_format(($productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
 
                         'profit_margin_parcent' => defaultProfitMargin_HH(),
-                        'unit_selling_price_inc_tax' => number_format(((($productVar->purchase_unit_price_before_tax * 1) * defaultProfitMargin_HH() /100) + $productVar->purchase_unit_price_before_tax * 1),2),
+                        'unit_selling_price_inc_tax' => number_format(((($productVar->purchase_unit_price_before_tax * 1) * defaultProfitMargin_HH() /100) + $productVar->purchase_unit_price_before_tax * 1),2,'.', ''),
                     ];
                 }
                 session(['productPurchaseCart' => $productPurchaseCart]);
@@ -292,15 +292,15 @@ class AddToCartController extends Controller
     {
         $product_var_id                     =  $request->product_var_id;
         $purchase_quantity                  =  $request->purchase_quantity;
-        $purchase_unit_price_before_discount=  number_format($request->purchase_unit_price_before_discount,2);
-        $discount_value_in_parcent          =  number_format($request->discount_value_in_parcent,2);
-        $purchase_unit_price_before_tax     =  number_format($request->purchase_unit_price_before_tax,2);
-        $sub_total_before_tax               =  number_format($request->sub_total_before_tax,2);
-        $product_tax                        =  number_format($request->product_tax,2);
-        $net_purchase_amount                =  number_format($request->net_purchase_amount,2);
-        $line_total                         =  number_format($request->line_total,2);
+        $purchase_unit_price_before_discount=  number_format($request->purchase_unit_price_before_discount,2,'.', '');
+        $discount_value_in_parcent          =  number_format($request->discount_value_in_parcent,2,'.', '');
+        $purchase_unit_price_before_tax     =  number_format($request->purchase_unit_price_before_tax,2,'.', '');
+        $sub_total_before_tax               =  number_format($request->sub_total_before_tax,2,'.', '');
+        $product_tax                        =  number_format($request->product_tax,2,'.', '');
+        $net_purchase_amount                =  number_format($request->net_purchase_amount,2,'.', '');
+        $line_total                         =  number_format($request->line_total,2,'.', '');
         $profit_margin_parcent              =  $request->profit_margin_parcent;
-        $unit_selling_price_inc_tax         =  number_format($request->unit_selling_price_inc_tax,2);
+        $unit_selling_price_inc_tax         =  number_format($request->unit_selling_price_inc_tax,2,'.', '');
 
         $productPurchaseCart = [];
         $productPurchaseCart = session()->has('productPurchaseCart') ? session()->get('productPurchaseCart')  : [];

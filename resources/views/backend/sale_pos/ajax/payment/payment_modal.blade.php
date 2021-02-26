@@ -41,26 +41,26 @@
                                 <input type="hidden" name="final_discount_value" value="{{$final_discount_value}}"/>
                                 <input type="hidden" name="final_discount_amount" value="{{$final_discount_amount}}"/>
                                 <input type="hidden" name="fianl_other_cost" value="{{$fianl_other_cost}}"/>
-                                <input type="hidden" id="fianl_payable_amount_get" name="fianl_payable_amount" value="{{$fianl_payable_amount}}"/>
+                                <input type="hidden" class="cr_fianl_payable_amount_get" id="fianl_payable_amount_get" name="fianl_payable_amount" value="{{$fianl_payable_amount}}"/>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                <p>Previous Due <span class="pull-right">tk 0.00</span></p>
-                                <p>Grand Total <span class="pull-right">tk {{$fianl_payable_amount}}</span></p>
-                                <p>Total Payable <span class="pull-right">tk {{$fianl_payable_amount}}</span></p>
+                                <p>Previous Due <span class="pull-right">tk <strong>0.00</strong></span></p>
+                                <p>Grand Total <span class="pull-right">tk <strong>{{$fianl_payable_amount}}</strong></span></p>
+                                <p>Total Payable <span class="pull-right">tk <strong>{{$fianl_payable_amount}}</strong></span></p>
                             </div>
                         </div>
                         <hr>
                         <div class="row" style="margin:2%;">
                             <div class="col-sm-6">
                                 <label>Paid Amount</label>
-                                <input type="number" step="any" id="final_payable_amount"  name="paid_amount" value="{{$fianl_payable_amount}}" placeholder="Paid Amount" class="final_payable_amount form-control">
+                                <input type="number" step="any" id="final_payable_amount"  name="paid_amount" value="{{$fianl_payable_amount}}" placeholder="Paid Amount" class="cr_final_payable_amount form-control">
                             </div>
                             <div class="col-sm-6">
                                 <label>Due Amount</label>
-                                <input type="number" step="any" id="final_due_amount_disabled"  disabled value="" placeholder="Due Amount" class="final_due_amount form-control">
-                                <input type="hidden" step="any" id="final_due_amount"  name="due_amount" value="" placeholder="Due Amount" class="final_due_amount form-control">
+                                <input type="number" step="any" id=""  disabled value="" placeholder="Due Amount" class="cr_final_due_amount form-control">
+                                <input type="hidden" step="any" id=""  name="due_amount" value="" placeholder="Due Amount" class="cr_final_due_amount form-control">
                             </div>
                         </div>
 
@@ -72,11 +72,11 @@
                             <div class="row mt-10" style="margin-bottom:2%;padding:0 2% 0 2%;">
                                 <div class="col-sm-6">
                                     <label>Given Amount</label>
-                                    <input type="number" step="any" id="calculation_given_amount"   placeholder="Given Amount" class="form-control">
+                                    <input type="number" step="any" id=""   placeholder="Given Amount" class="cr_given_amount_for_take_and_change form-control">
                                 </div>
                                 <div class="col-sm-6">
                                     <label>Change Amount</label>
-                                    <input type="number" step="any" disabled id="calculation_change_amount" placeholder="Change Amount" class="form-control">
+                                    <input type="number" step="any" disabled id="" placeholder="Change Amount" class="cr_change_amount_after_calculation form-control">
                                 </div>
                             </div>
                         </div>
